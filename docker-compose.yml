@@ -1,6 +1,16 @@
 services:
+  traefik:
+    image: traefik:2.5
+    ports:
+      - "80:80"
+      - "8080:8080"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - ./traefik.toml:/traefik.toml
   todolist:
     build: .
-    ports:
-      - "8081:8080"
+    labels:
+      - "traefik.http.routers.todolist.rule=PathPrefix(`/app`)"
+      - "traefik.http.middlewares.todolist.stripPrefix.prefixes=/app"
+      - "traefik.http.routers.todolist.middlewares=todolist@docker"
 

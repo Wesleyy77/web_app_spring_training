@@ -1,0 +1,13 @@
+[global]
+  sendAnonymousUsage = false
+
+[providers]
+  [providers.docker]
+    endpoint = "unix:///var/run/docker.sock"
+    watch = true
+    exposedByDefault = true
+
+[entryPoints]
+  [entryPoints.insecure]
+    address = ":80"
+
