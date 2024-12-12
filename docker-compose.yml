@@ -1,0 +1,6 @@
+services:
+  todolist:
+    build: .
+    ports:
+      - "8081:8080"
+
